@@ -10,7 +10,7 @@ public class empconsume {
 		
 		System.out.println("----Employee Management System----");
 		
-		System.out.println("Select Operation : \n 1 for add the Employee \n 2 for to print Employee");
+		System.out.println("Select Operation : \n 1 for add the Employee \n 2 for to print Employee \n 3 for Employee Name");
 		//reading the option for adding or printing employee details
 		int op=bs.nextInt();
 		switch(op) {
@@ -59,6 +59,14 @@ public class empconsume {
 			else {
 				System.out.println(e2.eid+" is "+e2.ename+" working in "+e2.edomain+" with"+e2.esalary+" salary");
 			}
+		}
+		case 3->{
+			
+			System.out.println("Enter emp id");
+			int eid=bs.nextInt();
+			dao.connect();
+			String username=dao.getEmpName(eid);
+			System.out.println(username);
 		}
 		}
 	//closing scanner

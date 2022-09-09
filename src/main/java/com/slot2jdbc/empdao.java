@@ -23,6 +23,28 @@ public class empdao {
 		return count;
 		
 	}
+	
+	public String getEmpName(int eid) throws Exception
+	{
+		String query="select * from anudipemp where eid="+eid;
+		
+		Statement st=con.createStatement();
+		
+		ResultSet rs=st.executeQuery(query);
+		if(rs.next())
+		{
+			String empname=rs.getString(2);
+			return empname;	
+		}
+		else {
+			return null;
+		}
+		
+		
+	}	
+	
+	
+	
 	//retriving employee details byusing eid given by the user
 	public employee  getEmployee(int eid)throws Exception {
 		//fetching employee details
