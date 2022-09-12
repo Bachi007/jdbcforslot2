@@ -85,5 +85,68 @@ public class bankingdao {
 		}
 	}
 	
+	public int deposit(int cid, int amount)throws Exception {
+		
+		String query="select * from banking where cid="+cid;
+		
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery(query);
+		rs.next();
+		int availamount=rs.getInt(5);
+		availamount+=amount;
+		String query2="update banking set caccbal="+availamount;
+		PreparedStatement pst=con.prepareStatement(query2);
+		
+		pst.executeUpdate();
+		
+		return availamount;
+		
+	}
+	
+	
+	public int checkBalance(int cid)throws Exception{
+		
+		String query="select * from banking where cid="+cid;
+		
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery(query);
+		rs.next();
+		int availabaleamount=rs.getInt(5);
+		return availabaleamount;
+	}	
+	
+	public int pinChange(int cid,String oldpwd,String newpwd)throws Exception{
+		
+		String query="select * from banking where cid="+cid;
+		
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery(query);
+		rs.next();
+		
+		String pwd=rs.getString(3);
+		if(pwd.equals(oldpwd)) {
+			
+			String query2="update banking set cpassword='"+newpwd+"' where cid="+cid;
+			
+			PreparedStatement pst=con.prepareStatement(query2);
+			int res=pst.executeUpdate();
+			return res;
+		}
+		else {
+			return -1;
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

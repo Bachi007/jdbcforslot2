@@ -59,9 +59,12 @@ public class bankingmain {
 			}
 			else {
 				System.out.println("Login Success");
-				
-				System.out.println("Select Operation: \n1 for Withdraw \n2 for deposit \n3 for check balance \n4 for pin change");
-				int op2=bs.nextInt();
+				int op2=0;
+				//iterating the menu
+				while(op2<5)
+				{
+				System.out.println("Select Operation: \n1 for Withdraw \n2 for deposit \n3 for check balance \n4 for pin change\n5 for logout");
+				op2=bs.nextInt();
 				switch(op2) {
 				
 				case 1->{
@@ -76,15 +79,42 @@ public class bankingmain {
 						System.out.println("Withdraw done, avaialble balance is: "+bal);
 					}
 				}
+				case 2->{
+					System.out.println("Enter amount to deposit");
+					int amount=bs.nextInt();
+					int bal=dao.deposit(res, amount);
+					System.out.println("Deposit done, the available balance is:"+bal);
+					
+				}
+				case 3->{
+					System.out.println("Avaiable balance : "+dao.checkBalance(res));
+				}
+				case 4->{
+					System.out.println("Enter present password");
+					String oldpwd=bs.next();
+					System.out.println("Enter new password");
+					String newpwd=bs.next();
+					int count=dao.pinChange(res, oldpwd, newpwd);
+				
+					if(count==-1)
+					{
+						System.out.println("Password wrong");
+					}
+					else {
+						System.out.println("Password changed successfully");
+					}
 				
 				
+				}
+				
+				default->System.out.println("Logout Successful");
 				
 				}
 				
 			}
 		}
 		
-		
+		}
 		
 		}
 		
